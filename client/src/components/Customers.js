@@ -20,14 +20,20 @@ export default function Customers() {
 
     const [customers, setCustomers] = useState([]);
     const [userInput, setInput] = useState("");
+    const [customerSubmitted, setSubmitted] = useState(false);
 
     useEffect(() => {
         // fetch('https://jsonplaceholder.typicode.com/users')
-        fetch('api/customers')
-            .then(res => res.json())
-            .then(customers => setCustomers(customers), () =>
-                console.log('Customers fetched...', customers));
-    }, [customers]);
+        const fetchData = async () => {
+            await fetch('api/customers')
+                .then(res => res.json())
+                .then(customers => setCustomers(customers), () =>
+                    console.log('Customers fetched...', customers));
+        }
+        fetchData();
+
+        setSubmitted(false);
+    }, [customerSubmitted]);
 
     const onChange = (e) => setInput(
         e.target.value
@@ -36,19 +42,23 @@ export default function Customers() {
     const handleSubmit = async () => {
         console.log("Clicked handleSubmit");
 
-        await fetch('api/addNewCustomer' , {
+        await fetch('api/addNewCustomer', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                id: customers.length + 1,
                 firstName: userInput,
+                lastName: "Unknown Last Name :)"
             })
         })
             .then(res => res.json())
-            .then(data => console.log(data))
-            .catch(err => console.log(err));
+            .then(data => { console.log(data) })
+            .catch(err => { console.log(err) });
+
+        setSubmitted(true);
     }
 
     return (

@@ -11,8 +11,11 @@ app.get('/api/customers', (req, res) => {
     res.json(customers);
 });
 
-app.post('/api/addNewCustomer', (req, res) => {
+app.post('/api/addNewCustomer', async (req, res) => {
     //implement POST method
+    const idNum = customers.length + 1;
+    await customers.push({id: idNum, firstName: 'Brad', lastName: 'Pitt'})
+    res.json("Hey Miguel :)")
 });
 
 const PORT = process.env.PORT || 5000;
