@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/miguelgas/react-express#readme",
   "dependencies": {
+    "@emotion/core": "^10.0.28",
     "concurrently": "^5.2.0",
     "express": "^4.17.1"
   },

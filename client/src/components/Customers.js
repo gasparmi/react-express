@@ -18,25 +18,56 @@ const liStyle = css`
 `;
 export default function Customers() {
 
-    const [ customers, setCustomers ] = useState([]);
+    const [customers, setCustomers] = useState([]);
+    const [userInput, setInput] = useState("");
 
-    useEffect( () => {
+    useEffect(() => {
         // fetch('https://jsonplaceholder.typicode.com/users')
         fetch('api/customers')
             .then(res => res.json())
-            .then(customers => setCustomers( customers ), () =>
-            console.log('Customers fetched...', customers));
-    });
+            .then(customers => setCustomers(customers), () =>
+                console.log('Customers fetched...', customers));
+    }, [customers]);
+
+    const onChange = (e) => setInput(
+        e.target.value
+    );
+
+    const handleSubmit = async () => {
+        console.log("Clicked handleSubmit");
+
+        await fetch('api/addNewCustomer' , {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                firstName: userInput,
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
+    }
 
     return (
         <div>
             <h2>Customers</h2>
             <ul css={ulStyle}>
-                {customers.map(customer => 
+                {customers.map(customer =>
                     <li css={liStyle} key={customer.id}> {customer.firstName} {customer.lastName}</li>
                     // <li css={liStyle} key={customer.id}> {customer.name} </li> Use this with https API
                 )}
             </ul>
+
+            <div>
+                <input type="text" placeholder="Enter name"
+                    onChange={onChange}
+                />
+                <button onClick={handleSubmit}> Submit new customer </button>
+            </div>
+
         </div>
     );
 }

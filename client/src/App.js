@@ -5,7 +5,6 @@ import { Global } from '@emotion/core';
 
 import Customers from './components/Customers';
 
-
 const pageStyles = css`
   body {
     margin: 15px 0 0 0;
