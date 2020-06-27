@@ -21,7 +21,9 @@
   "homepage": "https://github.com/miguelgas/react-express#readme",
   "dependencies": {
     "@emotion/core": "^10.0.28",
+    "body-parser": "^1.19.0",
     "concurrently": "^5.2.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1"
   },
   "devDependencies": {

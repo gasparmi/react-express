@@ -3,7 +3,7 @@
 import { css, jsx } from '@emotion/core';
 import { Global } from '@emotion/core';
 
-import Customers from './components/Customers';
+import People from './components/People';
 
 const pageStyles = css`
   body {
@@ -20,7 +20,7 @@ export default function App() {
   return (
     <div>
       <Global styles={pageStyles} />
-      <Customers />
+      <People />
     </div>
   );
 }
