@@ -1,8 +1,8 @@
 # react-express
-This is a small project to practice building a full-stack app using React and Node/Express
+This is a small project that serves as boilerplate for building a full-stack app using React and Node/Express
 
 ## License
-This software is distributed under the MIT License.
+This software is distributed under the MIT License
 
 ## Installation
 
